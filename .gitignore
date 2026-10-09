@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+runtime/
+*.db
+.pytest_cache/
+node_modules/
+dist/
+.DS_Store
+pytest-cache-files-*
+.logs/
+.cache/
+.idea/
+*.log

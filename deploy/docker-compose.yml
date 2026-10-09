@@ -1,0 +1,33 @@
+# 单机容器编排：FastAPI（含全部 Agent 与 MCP Server）+ 前端静态站点
+# 说明：本项目刻意不引入 Redis / Celery / Prometheus —— 上量之前中间件是负债。
+services:
+  api:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    environment:
+      LLM_PROVIDER: ${LLM_PROVIDER:-local}
+      LLM_MODEL: ${LLM_MODEL:-deepseek-chat}
+      LLM_BASE_URL: ${LLM_BASE_URL:-https://api.deepseek.com/v1}
+      LLM_API_KEY: ${LLM_API_KEY:-}
+      MCP_TRANSPORT: ${MCP_TRANSPORT:-inproc}
+      DATABASE_URL: sqlite:////data/mediagent.db
+    volumes:
+      - mediagent-data:/data
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+  web:
+    image: nginx:1.27-alpine
+    depends_on:
+      - api
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ../frontend/dist:/usr/share/nginx/html:ro
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+
+volumes:
+  mediagent-data:

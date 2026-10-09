@@ -1,0 +1,4 @@
+# 可选增强项：装上即自动启用，不装也能完整跑通全链路
+mcp>=1.0.0                     # 官方 MCP SDK：把内置工具注册成标准 MCP Server（stdio transport）
+sentence-transformers>=3.0.0   # BGE-M3 稠密向量 + BGE-Reranker 精排（约 2GB 权重）
+python-docx>=1.1.0             # DOCX 病历解析

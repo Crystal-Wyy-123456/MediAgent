@@ -1,0 +1,13 @@
+# MediAgent 后端依赖（Python 3.11+；LangGraph 的异步 interrupt() 需要 3.11 及以上）
+fastapi==0.143.0
+uvicorn[standard]==0.54.0
+langgraph==1.2.14
+langchain-core==1.6.9
+pydantic==2.14.0
+pydantic-settings==2.15.0
+PyJWT==2.15.1
+httpx==0.28.1
+python-multipart==0.0.32
+pymupdf==1.28.2        # 病历 PDF 解析（可选，缺失时自动降级为纯文本）
+pytest==9.1.1
+pytest-asyncio==1.4.0
